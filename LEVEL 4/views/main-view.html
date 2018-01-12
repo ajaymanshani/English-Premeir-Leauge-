@@ -1,0 +1,192 @@
+<style>
+
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+    width: 100%;
+    border: 1px solid #ddd;
+}
+
+th, td {
+    text-align: left;
+    padding: 8px;
+}
+
+tr:nth-child(even){background-color: #f2f2f2}
+
+</style>
+
+<style>
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+}
+
+/* Create three equal columns that floats next to each other */
+.column {
+    float: left;
+    width: 33.33%;
+    padding: 10px;
+    height: 300px; /* Should be removed. Only for demonstration */
+}
+
+/* Clear floats after the columns */
+.row:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+/* Responsive layout - makes the two columns stack on top of each other instead of next to each other */
+@media (max-width: 600px) {
+    .column {
+        width: 100%;
+    }
+}
+</style>	
+
+
+<style>
+body {
+    font-family: Arial;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+form.example input[type=text] {
+    padding: 10px;
+    font-size: 17px;
+    border: 1px solid grey;
+    float: left;
+    width: 80%;
+    background: #f1f1f1;
+}
+
+form.example button {
+    float: left;
+    width: 20%;
+    padding: 10px;
+    background: #2196F3;
+    color: white;
+    font-size: 17px;
+    border: 1px solid grey;
+    border-left: none;
+    cursor: pointer;
+}
+
+form.example button:hover {
+    background: #0b7dda;
+}
+
+form.example::after {
+    content: "";
+    clear: both;
+    display: table;
+}
+</style>
+
+<div class="row">
+
+  <div class="column" style="background-color:white;">
+    
+    <label for="searchByNameAndScore">Search By Team 1:</label>
+    <form class="example">
+    <input type="text" name="matches" placeholder="Enter Home Team" ng-model="searchByTeamDateOrScore.team1.name"/>
+    <button type="submit"><i class="fa fa-search"></i></button>
+    </form>
+
+    <br>
+
+    <label for="searchByNameAndScore">Search By Team 2:</label>
+   <form class="example">
+   <input type="text" name="matches" placeholder="Enter Away Team" ng-model="searchByTeamDateOrScore.team2.name"/>
+   <button type="submit"><i class="fa fa-search"></i></button>
+   </form>
+
+  </div>
+
+  <div class="column" style="background-color:white;">
+
+    <label for="searchByNameAndScore">Search By Date(yyy-mm-dd):</label>
+    <form class="example">
+    <input type="text" name="matches" placeholder="Enter Date" ng-model="searchByTeamDateOrScore.date"/>
+    <button type="submit"><i class="fa fa-search"></i></button>
+    </form>
+
+    <br>
+
+    <label for="searchByNameAndScore">Search By Score of Team 1:</label>
+   <form class="example">
+   <input type="text" name="matches" placeholder="Enter Date" ng-model="searchByTeamDateOrScore.score1"/>
+   <button type="submit"><i class="fa fa-search"></i></button>
+   </form>
+
+  </div>
+
+
+  <div class="column" style="background-color:white;">
+    
+    <label for="searchByNameAndScore">Search By Score of Team 2:</label>
+    <form class="example">
+    <input type="text" name="matches" placeholder="Enter Date" ng-model="searchByTeamDateOrScore.score2"/>
+    <button type="submit"><i class="fa fa-search"></i></button>
+    </form>
+
+    <br>
+
+    <label for="searchByMatchday">Search By Matchday/Round:</label>
+   <form class="example">
+   <input type="text" name="matches" placeholder="Enter Round" ng-model="searchByMatchday.name"/>
+   <button type="submit"><i class="fa fa-search"></i></button>
+   </form>
+
+  </div>
+  
+</div>
+
+<div>
+<div style="overflow-x:auto;">
+  <table>
+  <thead>
+    <tr>
+      <th> Rounds </th>
+      <th> Date </th>
+      <th> Team 1 </th>
+      <th> Team 2 </th>
+      <th> Score 1 </th>
+      <th> Score 2 </th>
+      <th> Check Details </th>
+    </tr>
+    </thead>
+
+    <tbody ng-repeat="content in mainView.contentsOf2016 | filter : searchByMatchday" ng-init="id1=$index">
+    <tr ng-repeat="match in content.matches | filter : searchByTeamDateOrScore " ng-init="id2=$index">
+      <td>{{ content.name }}</td>
+      <td>{{ match.date }} </td>
+      <td>{{ match.team1.name }}</td>
+      <td>{{ match.team2.name }}</td>
+      <td>{{ match.score1 }}</td>
+      <td>{{ match.score2 }}</td>
+      <td> <a class="main-butn" ng-href="#/match/{{id1}}/{{id2}}/{{match.date}}"> Check Details </a> </td>
+    </tr>
+    </tbody>
+
+    <tbody ng-repeat="content in mainView.contentsOf2015 | filter : searchByMatchday" ng-init="id1=$index">
+    <tr ng-repeat="match in content.matches | filter : searchByTeamDateOrScore " ng-init="id2=$index">
+      <td>{{ content.name }}</td>
+      <td>{{ match.date }} </td>
+      <td>{{ match.team1.name }}</td>
+      <td>{{ match.team2.name }}</td>
+      <td>{{ match.score1 }}</td>
+      <td>{{ match.score2 }}</td>
+      <td> <a class="main-butn" ng-href="#/match/{{id1}}/{{id2}}/{{match.date}}"> Check Details </a> </td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+</div>
